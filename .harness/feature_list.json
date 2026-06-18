@@ -1,0 +1,41 @@
+{
+  "project": "Sloprail",
+  "last_updated": "2026-06-18",
+  "features": [
+    {
+      "id": "F01",
+      "title": "Station Folder generator",
+      "state": "not_started",
+      "behavior": "Create a validated Station Folder from one Source Video Target Window using the v1 folder contract.",
+      "verification": "py scripts/validate_project.py"
+    },
+    {
+      "id": "F02",
+      "title": "Perceptual-hash Frame Collapse",
+      "state": "not_started",
+      "behavior": "Sample at 2 fps, reduce near-duplicate frames by perceptual-hash distance, and write frame-collapse-report.json.",
+      "verification": "py scripts/validate_project.py"
+    },
+    {
+      "id": "F03",
+      "title": "Temporal Strip renderer",
+      "state": "not_started",
+      "behavior": "Render a non-HTML temporal-strip.png from marked frames with embedded timing labels.",
+      "verification": "py scripts/validate_project.py"
+    },
+    {
+      "id": "F04",
+      "title": "Agent output validator",
+      "state": "not_started",
+      "behavior": "Validate agent-output/output.json and replacement-render.mp4 before merge.",
+      "verification": "py scripts/validate_project.py"
+    },
+    {
+      "id": "F05",
+      "title": "ffmpeg Normalizing Merge",
+      "state": "not_started",
+      "behavior": "Merge one completed Station into the Source Video while preserving original audio and writing merge evidence.",
+      "verification": "py scripts/validate_project.py"
+    }
+  ]
+}

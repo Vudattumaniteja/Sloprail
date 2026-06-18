@@ -1,0 +1,15 @@
+{
+  "session_id": "",
+  "started_at": "",
+  "project_path": "C:\\Users\\Manit\\Desktop\\moodborad",
+  "active_feature": "",
+  "context_usage": 0,
+  "handoff_ready": true,
+  "last_verification": "",
+  "decisions_made": [
+    "V1 is a visual canvas that creates Station Folders, not an agent harness.",
+    "V1 is non-HTML and uses image, Markdown, JSON, and video files.",
+    "ffmpeg automation performs visual replacement and preserves original audio."
+  ],
+  "files_modified": []
+}

@@ -1,0 +1,13 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+build/
+.DS_Store
+
+# Local prototype artifacts are preserved on disk but are not part of the v1 contract.
+prototype-station-001/
