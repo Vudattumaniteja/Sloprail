@@ -64,6 +64,14 @@ class StationFolderValidatorTests(unittest.TestCase):
 
             self.assertIn("unresolved_path_reference", issue_codes(station))
 
+    def test_placeholder_temporal_strip_image_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            station = Path(temp_dir) / "station"
+            shutil.copytree(CANONICAL, station)
+            (station / "visual-evidence" / "temporal-strip.png").write_text("placeholder", encoding="utf-8")
+
+            self.assertIn("invalid_image_file", issue_codes(station))
+
     def test_overlapping_station_target_windows_fail(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             project = Path(temp_dir) / "project"
