@@ -8,8 +8,10 @@ from pathlib import Path
 from typing import Any
 
 try:
+    from frame_collapse import collapse_station_frames
     from validate_station_folder import validate_project_or_station
 except ModuleNotFoundError:
+    from scripts.frame_collapse import collapse_station_frames
     from scripts.validate_station_folder import validate_project_or_station
 
 
@@ -166,8 +168,18 @@ def build_station_json(
     context_files: list[str],
     missing_context: list[str],
     media_properties: dict[str, Any],
+    frame_collapse_report: dict[str, Any],
 ) -> dict[str, Any]:
     duration_seconds = request.source_end_seconds - request.source_start_seconds
+    representative_frames = [
+        {
+            "id": frame["id"],
+            "path": frame["path"],
+            "coverage_span": frame["coverage_span"],
+            "selection_source": frame["selection_source"],
+        }
+        for frame in frame_collapse_report["kept_frames"]
+    ]
     return {
         "schema_version": 1,
         "station_id": request.station_id,
@@ -198,7 +210,11 @@ def build_station_json(
         "visual_evidence": {
             "source_window": {
                 "path": relative(source_window_path, request.output_folder),
-            }
+            },
+            "frame_collapse_report": {
+                "path": "visual-evidence/frame-collapse-report.json",
+            },
+            "representative_frames": representative_frames,
         },
         "agent_output": {
             "directory": "agent-output",
@@ -224,10 +240,16 @@ def generate_station_folder(request: StationRequest) -> Path:
     source_window_path = request.output_folder / "visual-evidence" / "source-window.mp4"
     extract_source_window(request.source_video, source_window_path, request.source_start_seconds, duration_seconds)
     media_properties = probe_media(source_window_path)
+    frame_collapse_report = collapse_station_frames(
+        station_folder=request.output_folder,
+        source_window=source_window_path,
+        source_start_seconds=request.source_start_seconds,
+        target_duration_seconds=duration_seconds,
+    )
 
     context_files, missing_context = write_context_files(request)
     write_readme(request, duration_seconds, missing_context)
-    station = build_station_json(request, source_window_path, context_files, missing_context, media_properties)
+    station = build_station_json(request, source_window_path, context_files, missing_context, media_properties, frame_collapse_report)
     (request.output_folder / "station.json").write_text(json.dumps(station, indent=2), encoding="utf-8")
 
     issues = validate_project_or_station(request.output_folder)

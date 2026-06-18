@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "report_type": "frame-collapse-report",
+  "source_window": {
+    "path": "visual-evidence/source-window.mp4",
+    "target_duration_seconds": 10.0
+  },
+  "sampling": {
+    "frame_sampling_rate_fps": 2.0,
+    "candidate_count": 3
+  },
+  "perceptual_hash": {
+    "method": "average_hash_8x8",
+    "hash_size": "8x8",
+    "distance_metric": "hamming",
+    "near_duplicate_threshold": 5
+  },
+  "representative_candidate_selection": {
+    "method": "quality-ranked-temporal-frame-deduplication",
+    "quality_signals": [
+      "brightness",
+      "contrast",
+      "sharpness",
+      "exposure_penalty"
+    ],
+    "kept_count": 2,
+    "rejected_near_duplicate_count": 1,
+    "manual_representative_frames": []
+  },
+  "kept_frames": [
+    {
+      "id": "rep-001",
+      "path": "visual-evidence/representative-frames/rep-001.jpg",
+      "source_candidate_id": "candidate-0001",
+      "station_local_time_seconds": 0.0,
+      "source_time_seconds": 12.0,
+      "perceptual_hash": "1111000011110000111100001111000011110000111100001111000011110000",
+      "quality_signals": {
+        "brightness": 128.0,
+        "contrast": 45.0,
+        "sharpness": 18.0,
+        "exposure_penalty": 0.0039
+      },
+      "quality_score": 62.961,
+      "coverage_span": {
+        "station_local_start_seconds": 0.0,
+        "station_local_end_seconds": 4.0,
+        "source_start_seconds": 12.0,
+        "source_end_seconds": 16.0
+      },
+      "selection_reason": "kept after quality ranking and perceptual-hash near-duplicate rejection",
+      "selection_source": "automatic-frame-collapse"
+    },
+    {
+      "id": "rep-002",
+      "path": "visual-evidence/representative-frames/rep-002.jpg",
+      "source_candidate_id": "candidate-0003",
+      "station_local_time_seconds": 8.0,
+      "source_time_seconds": 20.0,
+      "perceptual_hash": "0000111100001111000011110000111100001111000011110000111100001111",
+      "quality_signals": {
+        "brightness": 127.0,
+        "contrast": 44.0,
+        "sharpness": 17.0,
+        "exposure_penalty": 0.0039
+      },
+      "quality_score": 60.961,
+      "coverage_span": {
+        "station_local_start_seconds": 4.0,
+        "station_local_end_seconds": 10.0,
+        "source_start_seconds": 16.0,
+        "source_end_seconds": 22.0
+      },
+      "selection_reason": "kept after quality ranking and perceptual-hash near-duplicate rejection",
+      "selection_source": "automatic-frame-collapse"
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "candidate-0001",
+      "station_local_time_seconds": 0.0,
+      "source_time_seconds": 12.0,
+      "perceptual_hash": "1111000011110000111100001111000011110000111100001111000011110000",
+      "quality_signals": {
+        "brightness": 128.0,
+        "contrast": 45.0,
+        "sharpness": 18.0,
+        "exposure_penalty": 0.0039
+      },
+      "quality_score": 62.961,
+      "status": "kept",
+      "representative_frame_id": "rep-001",
+      "selection_reason": "highest-quality-visual-state-candidate"
+    },
+    {
+      "candidate_id": "candidate-0002",
+      "station_local_time_seconds": 0.5,
+      "source_time_seconds": 12.5,
+      "perceptual_hash": "1111000011110000111100001111000011110000111100001111000011110001",
+      "quality_signals": {
+        "brightness": 128.0,
+        "contrast": 44.5,
+        "sharpness": 17.5,
+        "exposure_penalty": 0.0039
+      },
+      "quality_score": 61.961,
+      "status": "rejected",
+      "rejected_by_candidate_id": "candidate-0001",
+      "hamming_distance": 1,
+      "rejection_reason": "near-duplicate-by-perceptual-hash-distance"
+    },
+    {
+      "candidate_id": "candidate-0003",
+      "station_local_time_seconds": 8.0,
+      "source_time_seconds": 20.0,
+      "perceptual_hash": "0000111100001111000011110000111100001111000011110000111100001111",
+      "quality_signals": {
+        "brightness": 127.0,
+        "contrast": 44.0,
+        "sharpness": 17.0,
+        "exposure_penalty": 0.0039
+      },
+      "quality_score": 60.961,
+      "status": "kept",
+      "representative_frame_id": "rep-002",
+      "selection_reason": "highest-quality-visual-state-candidate"
+    }
+  ]
+}

@@ -13,7 +13,7 @@
     {
       "id": "F02",
       "title": "Perceptual-hash Frame Collapse",
-      "state": "not_started",
+      "state": "completed",
       "behavior": "Sample at 2 fps, reduce near-duplicate frames by perceptual-hash distance, and write frame-collapse-report.json.",
       "verification": "py scripts/validate_project.py",
       "issue": "https://github.com/Vudattumaniteja/Sloprail/issues/5"

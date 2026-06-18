@@ -207,6 +207,81 @@ def validate_partial_station_context(folder: Path, station: dict[str, Any], issu
         issues.append(issue("partial_context_without_missing_files", folder / "station.json", "station_context.partial is true but no missing context is declared."))
 
 
+def validate_frame_collapse_report(folder: Path, station: dict[str, Any], issues: list[ValidationIssue]) -> None:
+    visual_evidence = station.get("visual_evidence")
+    if not isinstance(visual_evidence, dict):
+        issues.append(issue("missing_visual_evidence", folder / "station.json", "station.json must declare visual_evidence."))
+        return
+
+    report_ref = visual_evidence.get("frame_collapse_report")
+    if not isinstance(report_ref, dict) or not isinstance(report_ref.get("path"), str):
+        issues.append(issue("missing_frame_collapse_report", folder / "station.json", "station.json must reference visual-evidence/frame-collapse-report.json."))
+        return
+
+    report_path = resolve_relative(folder, report_ref["path"])
+    report = load_json(report_path, issues)
+    if report is None:
+        return
+
+    sampling = report.get("sampling")
+    perceptual_hash = report.get("perceptual_hash")
+    selection = report.get("representative_candidate_selection")
+    kept_frames = report.get("kept_frames")
+    candidates = report.get("candidates")
+    if not isinstance(sampling, dict):
+        issues.append(issue("invalid_frame_collapse_report", report_path, "Frame Collapse Report must contain sampling."))
+        return
+    if not isinstance(perceptual_hash, dict):
+        issues.append(issue("invalid_frame_collapse_report", report_path, "Frame Collapse Report must contain perceptual_hash."))
+        return
+    if not isinstance(selection, dict):
+        issues.append(issue("invalid_frame_collapse_report", report_path, "Frame Collapse Report must contain representative_candidate_selection."))
+        return
+    if not isinstance(kept_frames, list):
+        issues.append(issue("invalid_frame_collapse_report", report_path, "Frame Collapse Report kept_frames must be a list."))
+        return
+    if not isinstance(candidates, list):
+        issues.append(issue("invalid_frame_collapse_report", report_path, "Frame Collapse Report candidates must be a list."))
+        return
+
+    if sampling.get("frame_sampling_rate_fps") != 2.0:
+        issues.append(issue("invalid_frame_sampling_rate", report_path, "Frame Collapse must use the v1 Frame Sampling Rate of 2 fps."))
+    if sampling.get("candidate_count") != len(candidates):
+        issues.append(issue("invalid_frame_collapse_counts", report_path, "sampling.candidate_count must match candidates length."))
+    if perceptual_hash.get("distance_metric") != "hamming":
+        issues.append(issue("invalid_perceptual_hash_contract", report_path, "Frame Collapse must use Hamming distance for perceptual-hash comparison."))
+    if not isinstance(perceptual_hash.get("near_duplicate_threshold"), int):
+        issues.append(issue("invalid_perceptual_hash_contract", report_path, "perceptual_hash.near_duplicate_threshold must be an integer."))
+
+    manual_frames = selection.get("manual_representative_frames")
+    if not isinstance(manual_frames, list):
+        issues.append(issue("missing_manual_representative_frame_support", report_path, "Frame Collapse Report must represent Manual Representative Frame support."))
+    if selection.get("kept_count") != len(kept_frames):
+        issues.append(issue("invalid_frame_collapse_counts", report_path, "representative_candidate_selection.kept_count must match kept_frames length."))
+    rejected_count = sum(1 for candidate in candidates if isinstance(candidate, dict) and candidate.get("status") == "rejected")
+    if selection.get("rejected_near_duplicate_count") != rejected_count:
+        issues.append(
+            issue(
+                "invalid_frame_collapse_counts",
+                report_path,
+                "representative_candidate_selection.rejected_near_duplicate_count must match rejected candidate count.",
+            )
+        )
+
+    for kept in kept_frames:
+        if not isinstance(kept, dict):
+            issues.append(issue("invalid_frame_collapse_report", report_path, "Each kept frame must be a JSON object."))
+            continue
+        kept_path = kept.get("path")
+        if not isinstance(kept_path, str):
+            issues.append(issue("invalid_frame_collapse_report", report_path, "Each kept frame must declare path."))
+            continue
+        if not resolve_relative(folder, kept_path).is_file():
+            issues.append(issue("unresolved_path_reference", report_path, f"Frame Collapse kept frame path does not resolve: {kept_path}"))
+        if not isinstance(kept.get("coverage_span"), dict):
+            issues.append(issue("invalid_frame_collapse_report", report_path, "Each kept frame must declare a Coverage Span."))
+
+
 def station_record_from_json(folder: Path, station: dict[str, Any], issues: list[ValidationIssue]) -> StationRecord | None:
     station_id = station.get("station_id")
     if not isinstance(station_id, str) or not station_id.strip():
@@ -267,6 +342,7 @@ def validate_station_folder(folder: Path) -> tuple[StationRecord | None, list[Va
 
     validate_path_references(folder, station, issues)
     validate_partial_station_context(folder, station, issues)
+    validate_frame_collapse_report(folder, station, issues)
     record = station_record_from_json(folder, station, issues)
     return record, issues
 
