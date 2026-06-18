@@ -29,7 +29,7 @@
     {
       "id": "F04",
       "title": "Agent output validator",
-      "state": "not_started",
+      "state": "completed",
       "behavior": "Validate agent-output/output.json and replacement-render.mp4 before merge.",
       "verification": "py scripts/validate_project.py",
       "issue": "https://github.com/Vudattumaniteja/Sloprail/issues/7"

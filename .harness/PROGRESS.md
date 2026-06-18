@@ -16,6 +16,7 @@
 - [x] Issue #4 Source Video Target Window to Station Folder shell generator implemented
 - [x] Issue #5 perceptual-hash Frame Collapse report implemented
 - [x] Issue #6 Representative Frames, Marked Frames, and Temporal Strip implemented
+- [x] Issue #7 Agent Output Validation implemented
 
 ## In Progress
 - [x] Push private GitHub repository
@@ -39,4 +40,5 @@
 
 ## Next Steps
 1. Build ffmpeg merge automation with Normalization Report.
-2. Run first fixture-backed end-to-end Station demo.
+2. Add Human Review Notes for merged playback.
+3. Run first fixture-backed end-to-end Station demo.
