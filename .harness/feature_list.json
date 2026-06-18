@@ -21,7 +21,7 @@
     {
       "id": "F03",
       "title": "Temporal Strip renderer",
-      "state": "not_started",
+      "state": "completed",
       "behavior": "Render a non-HTML temporal-strip.png from marked frames with embedded timing labels.",
       "verification": "py scripts/validate_project.py",
       "issue": "https://github.com/Vudattumaniteja/Sloprail/issues/6"

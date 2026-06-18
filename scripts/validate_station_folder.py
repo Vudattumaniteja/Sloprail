@@ -280,6 +280,74 @@ def validate_frame_collapse_report(folder: Path, station: dict[str, Any], issues
             issues.append(issue("unresolved_path_reference", report_path, f"Frame Collapse kept frame path does not resolve: {kept_path}"))
         if not isinstance(kept.get("coverage_span"), dict):
             issues.append(issue("invalid_frame_collapse_report", report_path, "Each kept frame must declare a Coverage Span."))
+        elif not isinstance(kept["coverage_span"].get("id"), str):
+            issues.append(issue("invalid_frame_collapse_report", report_path, "Each Coverage Span must declare an id."))
+
+
+def validate_visual_evidence_contract(folder: Path, station: dict[str, Any], issues: list[ValidationIssue]) -> None:
+    visual_evidence = station.get("visual_evidence")
+    if not isinstance(visual_evidence, dict):
+        return
+
+    temporal_strip = visual_evidence.get("temporal_strip")
+    representative_frames = visual_evidence.get("representative_frames")
+    marked_frames = visual_evidence.get("marked_frames")
+    if not isinstance(temporal_strip, dict) or temporal_strip.get("path") != "visual-evidence/temporal-strip.png":
+        issues.append(issue("missing_temporal_strip", folder / "station.json", "station.json must reference visual-evidence/temporal-strip.png."))
+    if not isinstance(representative_frames, list) or not representative_frames:
+        issues.append(issue("missing_representative_frames", folder / "station.json", "visual_evidence.representative_frames must be a non-empty list."))
+        representative_frames = []
+    if not isinstance(marked_frames, list) or not marked_frames:
+        issues.append(issue("missing_marked_frames", folder / "station.json", "visual_evidence.marked_frames must be a non-empty list."))
+        marked_frames = []
+
+    marked_by_id = {
+        frame.get("id"): frame
+        for frame in marked_frames
+        if isinstance(frame, dict) and isinstance(frame.get("id"), str)
+    }
+    for frame in representative_frames:
+        if not isinstance(frame, dict):
+            issues.append(issue("invalid_representative_frame", folder / "station.json", "Each Representative Frame entry must be a JSON object."))
+            continue
+        frame_id = frame.get("id")
+        frame_path = frame.get("path")
+        coverage_span = frame.get("coverage_span")
+        marked_frame_id = frame.get("marked_frame_id")
+        if not isinstance(frame_id, str):
+            issues.append(issue("invalid_representative_frame", folder / "station.json", "Each Representative Frame must declare id."))
+        if not isinstance(frame_path, str) or not resolve_relative(folder, frame_path).is_file():
+            issues.append(issue("unresolved_path_reference", folder / "station.json", f"Representative Frame path does not resolve: {frame_path}"))
+        if not isinstance(coverage_span, dict) or not isinstance(coverage_span.get("id"), str):
+            issues.append(issue("invalid_coverage_span", folder / "station.json", "Each Representative Frame must link a Coverage Span with id and timing."))
+            continue
+        required_span_numbers = [
+            coverage_span.get("source_start_seconds"),
+            coverage_span.get("source_end_seconds"),
+            coverage_span.get("station_local_start_seconds"),
+            coverage_span.get("station_local_end_seconds"),
+        ]
+        if any(as_float(value) is None for value in required_span_numbers):
+            issues.append(issue("invalid_coverage_span", folder / "station.json", "Coverage Span timing must include source and station-local start/end seconds."))
+        if not isinstance(marked_frame_id, str) or marked_frame_id not in marked_by_id:
+            issues.append(issue("missing_marked_frame_link", folder / "station.json", "Each Representative Frame must link its Marked Frame."))
+            continue
+        marked = marked_by_id[marked_frame_id]
+        if marked.get("representative_frame_id") != frame_id:
+            issues.append(issue("invalid_marked_frame_link", folder / "station.json", "Marked Frame representative_frame_id must match its Representative Frame."))
+        if marked.get("coverage_span_id") != coverage_span.get("id"):
+            issues.append(issue("invalid_marked_frame_link", folder / "station.json", "Marked Frame coverage_span_id must match its Representative Frame Coverage Span."))
+
+    for frame in marked_frames:
+        if not isinstance(frame, dict):
+            issues.append(issue("invalid_marked_frame", folder / "station.json", "Each Marked Frame entry must be a JSON object."))
+            continue
+        frame_path = frame.get("path")
+        if not isinstance(frame_path, str) or not resolve_relative(folder, frame_path).is_file():
+            issues.append(issue("unresolved_path_reference", folder / "station.json", f"Marked Frame path does not resolve: {frame_path}"))
+        markup_status = frame.get("markup_status")
+        if markup_status not in {"no_visual_markup", "visual_markup_present"}:
+            issues.append(issue("invalid_markup_status", folder / "station.json", "Marked Frames must declare markup_status as no_visual_markup or visual_markup_present."))
 
 
 def station_record_from_json(folder: Path, station: dict[str, Any], issues: list[ValidationIssue]) -> StationRecord | None:
@@ -343,6 +411,7 @@ def validate_station_folder(folder: Path) -> tuple[StationRecord | None, list[Va
     validate_path_references(folder, station, issues)
     validate_partial_station_context(folder, station, issues)
     validate_frame_collapse_report(folder, station, issues)
+    validate_visual_evidence_contract(folder, station, issues)
     record = station_record_from_json(folder, station, issues)
     return record, issues
 

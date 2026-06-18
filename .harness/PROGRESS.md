@@ -15,6 +15,7 @@
 - [x] Issue #3 canonical non-HTML Station Folder fixture and Station Handoff Validation implemented
 - [x] Issue #4 Source Video Target Window to Station Folder shell generator implemented
 - [x] Issue #5 perceptual-hash Frame Collapse report implemented
+- [x] Issue #6 Representative Frames, Marked Frames, and Temporal Strip implemented
 
 ## In Progress
 - [x] Push private GitHub repository
@@ -37,6 +38,5 @@
 - [#10 Run first fixture-backed end-to-end Station demo](https://github.com/Vudattumaniteja/Sloprail/issues/10)
 
 ## Next Steps
-1. Render Representative Frames, Marked Frames, and Temporal Strip.
-2. Build ffmpeg merge automation with Normalization Report.
-3. Run first fixture-backed end-to-end Station demo.
+1. Build ffmpeg merge automation with Normalization Report.
+2. Run first fixture-backed end-to-end Station demo.

@@ -194,6 +194,7 @@ def write_kept_frames(
     kept_frames: list[KeptFrame] = []
     for index, (candidate, span) in enumerate(zip(kept_candidates, spans, strict=True), start=1):
         representative_path = representative_dir / f"rep-{index:03d}.jpg"
+        span = {"id": f"span-{index:03d}", **span}
         shutil.copyfile(candidate.path, representative_path)
         kept_frames.append(
             KeptFrame(

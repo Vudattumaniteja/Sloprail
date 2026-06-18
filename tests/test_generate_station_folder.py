@@ -82,7 +82,9 @@ class GenerateStationFolderTests(unittest.TestCase):
             self.assertEqual(station_json["target_window"]["station_local_end_seconds"], 2.0)
             self.assertEqual(station_json["read_boundary"]["scope"], "station-folder-only")
             self.assertEqual(station_json["visual_evidence"]["frame_collapse_report"]["path"], "visual-evidence/frame-collapse-report.json")
+            self.assertEqual(station_json["visual_evidence"]["temporal_strip"]["path"], "visual-evidence/temporal-strip.png")
             self.assertTrue(station_json["visual_evidence"]["representative_frames"])
+            self.assertTrue(station_json["visual_evidence"]["marked_frames"])
             self.assertTrue(station_json["station_context"]["partial"])
             self.assertEqual(station_json["station_context"]["missing"], ["design-rules.md"])
             self.assertIn("Partial Station Context", (output_folder / "README.md").read_text(encoding="utf-8"))
@@ -95,6 +97,11 @@ class GenerateStationFolderTests(unittest.TestCase):
             self.assertGreater(report["sampling"]["candidate_count"], 0)
             for kept_frame in report["kept_frames"]:
                 self.assertTrue((output_folder / kept_frame["path"]).is_file())
+                self.assertIn("id", kept_frame["coverage_span"])
+            for marked_frame in station_json["visual_evidence"]["marked_frames"]:
+                self.assertTrue((output_folder / marked_frame["path"]).is_file())
+                self.assertEqual(marked_frame["markup_status"], "no_visual_markup")
+            self.assertTrue((output_folder / "visual-evidence" / "temporal-strip.png").is_file())
 
 
 if __name__ == "__main__":
