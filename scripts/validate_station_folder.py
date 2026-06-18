@@ -8,11 +8,17 @@ from typing import Any
 
 from PIL import Image
 
+try:
+    from review_notes import ALLOWED_CATEGORIES, ALLOWED_REVIEW_SUBJECTS, TIME_TOLERANCE_SECONDS
+except ModuleNotFoundError:
+    from scripts.review_notes import ALLOWED_CATEGORIES, ALLOWED_REVIEW_SUBJECTS, TIME_TOLERANCE_SECONDS
+
 
 REQUIRED_STATION_FILES = [
     "README.md",
     "station.json",
     "notes.md",
+    "review-notes.json",
 ]
 
 REQUIRED_STATION_DIRS = [
@@ -370,6 +376,72 @@ def validate_visual_evidence_contract(folder: Path, station: dict[str, Any], iss
             issues.append(issue("invalid_markup_status", folder / "station.json", "Marked Frames must declare markup_status as no_visual_markup or visual_markup_present."))
 
 
+def validate_human_review_notes(folder: Path, station: dict[str, Any], issues: list[ValidationIssue]) -> None:
+    review = station.get("human_review_notes")
+    if not isinstance(review, dict) or not isinstance(review.get("path"), str):
+        issues.append(issue("missing_human_review_notes", folder / "station.json", "station.json must reference review-notes.json for Human Review Notes."))
+        return
+    if review.get("path") != "review-notes.json":
+        issues.append(issue("invalid_human_review_notes_path", folder / "station.json", "Human Review Notes must use review-notes.json in the Station Folder root."))
+        return
+
+    notes_path = folder / review["path"]
+    notes_payload = load_json(notes_path, issues)
+    if notes_payload is None:
+        return
+
+    target = station.get("target_window")
+    if not isinstance(target, dict):
+        return
+    source_start = as_float(target.get("source_start_seconds"))
+    duration = as_float(target.get("duration_seconds"))
+    if source_start is None or duration is None:
+        return
+
+    if notes_payload.get("schema_version") != 1:
+        issues.append(issue("invalid_human_review_notes", notes_path, "review-notes.json schema_version must be 1."))
+    if notes_payload.get("station_id") != station.get("station_id"):
+        issues.append(issue("invalid_human_review_notes", notes_path, "review-notes.json station_id must match station.json."))
+    allowed_categories = notes_payload.get("allowed_categories")
+    if not isinstance(allowed_categories, list) or set(allowed_categories) != ALLOWED_CATEGORIES:
+        issues.append(issue("invalid_human_review_categories", notes_path, "Human Review Notes must allow fps, visual, and general categories."))
+    workflow = notes_payload.get("workflow")
+    if not isinstance(workflow, dict) or workflow.get("auto_fix") is not False:
+        issues.append(issue("invalid_human_review_workflow", notes_path, "Human Review Notes must document HITL review with auto_fix=false."))
+    elif workflow.get("visible_normalization_damage") != "record_in_human_review_notes_and_rerun_manually":
+        issues.append(issue("invalid_human_review_workflow", notes_path, "Visible normalization damage must be recorded and rerun manually, not auto-fixed."))
+
+    notes = notes_payload.get("notes")
+    if not isinstance(notes, list):
+        issues.append(issue("invalid_human_review_notes", notes_path, "review-notes.json notes must be a list."))
+        return
+    for index, note in enumerate(notes, start=1):
+        if not isinstance(note, dict):
+            issues.append(issue("invalid_human_review_note", notes_path, f"Human Review Note #{index} must be a JSON object."))
+            continue
+        station_local = as_float(note.get("station_local_time_seconds"))
+        source_time = as_float(note.get("source_video_time_seconds"))
+        category = note.get("category")
+        observation = note.get("observation")
+        if station_local is None or source_time is None:
+            issues.append(issue("invalid_review_timecode", notes_path, "Each Human Review Note must record station-local and Source Video time."))
+            continue
+        if station_local < 0 or station_local > duration:
+            issues.append(issue("invalid_review_timecode", notes_path, "Human Review Note station-local time must fall inside the Target Window."))
+        if abs((source_start + station_local) - source_time) > TIME_TOLERANCE_SECONDS:
+            issues.append(issue("invalid_review_timecode", notes_path, "Human Review Note Source Video time must match station-local time plus Target Window start."))
+        if category not in ALLOWED_CATEGORIES:
+            issues.append(issue("invalid_human_review_category", notes_path, "Human Review Note category must be fps, visual, or general."))
+        if note.get("review_subject") not in ALLOWED_REVIEW_SUBJECTS:
+            issues.append(issue("invalid_human_review_subject", notes_path, "Human Review Note review_subject must be replacement_render or merged_output."))
+        if not isinstance(observation, str) or not observation.strip():
+            issues.append(issue("empty_human_review_observation", notes_path, "Human Review Note observation must not be empty."))
+        reference = note.get("normalization_report_reference")
+        if reference is not None:
+            if not isinstance(reference, dict) or not isinstance(reference.get("path"), str) or not isinstance(reference.get("detail"), str):
+                issues.append(issue("invalid_normalization_report_reference", notes_path, "Normalization Report references must include path and detail."))
+
+
 def station_record_from_json(folder: Path, station: dict[str, Any], issues: list[ValidationIssue]) -> StationRecord | None:
     station_id = station.get("station_id")
     if not isinstance(station_id, str) or not station_id.strip():
@@ -432,6 +504,7 @@ def validate_station_folder(folder: Path) -> tuple[StationRecord | None, list[Va
     validate_partial_station_context(folder, station, issues)
     validate_frame_collapse_report(folder, station, issues)
     validate_visual_evidence_contract(folder, station, issues)
+    validate_human_review_notes(folder, station, issues)
     record = station_record_from_json(folder, station, issues)
     return record, issues
 

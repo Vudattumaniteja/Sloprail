@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "station_id": "station-001",
+  "target_window": {
+    "source_start_seconds": 12.0,
+    "source_end_seconds": 22.0,
+    "duration_seconds": 10.0
+  },
+  "workflow": {
+    "auto_fix": false,
+    "visible_normalization_damage": "record_in_human_review_notes_and_rerun_manually"
+  },
+  "allowed_categories": [
+    "fps",
+    "general",
+    "visual"
+  ],
+  "notes": []
+}

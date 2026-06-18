@@ -81,5 +81,9 @@
     "replacement_render_path": "agent-output/replacement-render.mp4",
     "render_notes_path": "agent-output/render-notes.md",
     "output_json_path": "agent-output/output.json"
+  },
+  "human_review_notes": {
+    "path": "review-notes.json",
+    "instruction": "Record Human Review Notes after Replacement Render or Merged Output review; visible normalization damage is recorded here and rerun manually."
   }
 }

@@ -48,6 +48,13 @@ AND preserves the original Source Video audio
 AND writes a Merged Output
 AND writes a Normalization Report.
 
+### Scenario: Record Human Review Notes after playback review
+GIVEN a Station Folder with `review-notes.json`
+WHEN a human reviews a Replacement Render or Merged Output
+THEN each Human Review Note records station-local time, matching Source Video time, category, and observation
+AND supports fps, visual, and general issue categories
+AND visible normalization damage is recorded for manual rerun instead of auto-fixed.
+
 ### Error: Station overlaps another Station
 
 GIVEN an existing Station covering `300s-320s`

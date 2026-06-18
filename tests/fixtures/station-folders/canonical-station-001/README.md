@@ -13,3 +13,6 @@ This Station intentionally omits `design-rules.md`. Do not invent missing design
 
 ## Required Output
 Write Agent Action results under `agent-output/`.
+
+## Human Review Notes
+After reviewing a Replacement Render or Merged Output, write station-local observations to `review-notes.json`. Visible normalization damage is recorded as Human Review Notes and rerun manually; Sloprail does not auto-fix review findings.

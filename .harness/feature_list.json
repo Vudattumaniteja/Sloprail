@@ -41,6 +41,14 @@
       "behavior": "Merge one completed Station into the Source Video while preserving original audio and writing merge evidence.",
       "verification": "py scripts/validate_project.py",
       "issue": "https://github.com/Vudattumaniteja/Sloprail/issues/8"
+    },
+    {
+      "id": "F06",
+      "title": "Human Review Notes",
+      "state": "completed",
+      "behavior": "Record station-local Human Review Notes with matching Source Video time, issue category, reviewer observation, and optional Normalization Report references.",
+      "verification": "py scripts/validate_project.py",
+      "issue": "https://github.com/Vudattumaniteja/Sloprail/issues/9"
     }
   ]
 }
