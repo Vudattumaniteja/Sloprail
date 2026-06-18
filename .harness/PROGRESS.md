@@ -24,6 +24,14 @@
 ## GitHub Issues
 - [#1 PRD: Sloprail V1 Station Folder and Replacement Render Workflow](https://github.com/Vudattumaniteja/Sloprail/issues/1)
 - [#2 PRD: Sloprail and spec-coordinator overlap boundary](https://github.com/Vudattumaniteja/Sloprail/issues/2)
+- [#3 Build canonical non-HTML Station Folder fixture and validator](https://github.com/Vudattumaniteja/Sloprail/issues/3)
+- [#4 Generate source-window media and Station README manifest](https://github.com/Vudattumaniteja/Sloprail/issues/4)
+- [#5 Implement perceptual-hash Frame Collapse report](https://github.com/Vudattumaniteja/Sloprail/issues/5)
+- [#6 Render Representative Frames, Marked Frames, and Temporal Strip](https://github.com/Vudattumaniteja/Sloprail/issues/6)
+- [#7 Validate agent-output contract before merge](https://github.com/Vudattumaniteja/Sloprail/issues/7)
+- [#8 Merge one completed Station with ffmpeg Normalizing Merge](https://github.com/Vudattumaniteja/Sloprail/issues/8)
+- [#9 Add Human Review Notes for merged playback](https://github.com/Vudattumaniteja/Sloprail/issues/9)
+- [#10 Run first fixture-backed end-to-end Station demo](https://github.com/Vudattumaniteja/Sloprail/issues/10)
 
 ## Next Steps
 1. Build a minimal Station Folder generator.
