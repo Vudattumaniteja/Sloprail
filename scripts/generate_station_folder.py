@@ -9,10 +9,12 @@ from typing import Any
 
 try:
     from frame_collapse import collapse_station_frames
+    from review_notes import default_review_notes
     from temporal_evidence import build_temporal_evidence
     from validate_station_folder import validate_project_or_station
 except ModuleNotFoundError:
     from scripts.frame_collapse import collapse_station_frames
+    from scripts.review_notes import default_review_notes
     from scripts.temporal_evidence import build_temporal_evidence
     from scripts.validate_station_folder import validate_project_or_station
 
@@ -232,6 +234,10 @@ def build_station_json(
             "render_notes_path": "agent-output/render-notes.md",
             "output_json_path": "agent-output/output.json",
         },
+        "human_review_notes": {
+            "path": "review-notes.json",
+            "instruction": "Record Human Review Notes after Replacement Render or Merged Output review; visible normalization damage is recorded here and rerun manually.",
+        },
     }
 
 
@@ -270,6 +276,7 @@ def generate_station_folder(request: StationRequest) -> Path:
         temporal_evidence,
     )
     (request.output_folder / "station.json").write_text(json.dumps(station, indent=2), encoding="utf-8")
+    (request.output_folder / "review-notes.json").write_text(json.dumps(default_review_notes(station), indent=2), encoding="utf-8")
 
     issues = validate_project_or_station(request.output_folder)
     if issues:

@@ -49,7 +49,7 @@
 
 ## Phase 6: Review Loop
 
-- [ ] Add Human Review Notes with station-local and source time.
-- [ ] Record FPS, visual, and general issue categories.
-- [ ] Keep normalization damage as human-reviewed evidence, not auto-fix.
+- [x] Add Human Review Notes with station-local and source time.
+- [x] Record FPS, visual, and general issue categories.
+- [x] Keep normalization damage as human-reviewed evidence, not auto-fix.
 - [ ] Document rerun workflow after a bad Replacement Render.

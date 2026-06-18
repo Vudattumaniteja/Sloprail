@@ -21,6 +21,7 @@ REQUIRED_FILES = [
     "scripts/temporal_evidence.py",
     "scripts/validate_agent_output.py",
     "scripts/merge_station.py",
+    "scripts/review_notes.py",
     ".harness/PROGRESS.md",
     ".harness/DECISIONS.md",
     ".harness/feature_list.json",
@@ -51,9 +52,11 @@ REQUIRED_FILES = [
     "tests/test_temporal_evidence.py",
     "tests/test_agent_output_validator.py",
     "tests/test_merge_station.py",
+    "tests/test_review_notes.py",
     "tests/fixtures/station-folders/canonical-station-001/README.md",
     "tests/fixtures/station-folders/canonical-station-001/station.json",
     "tests/fixtures/station-folders/canonical-station-001/notes.md",
+    "tests/fixtures/station-folders/canonical-station-001/review-notes.json",
     "tests/fixtures/station-folders/canonical-station-001/station-context/full-transcript.md",
     "tests/fixtures/station-folders/canonical-station-001/station-context/target-window-transcript.md",
     "tests/fixtures/station-folders/canonical-station-001/station-context/storyline.md",
@@ -99,6 +102,7 @@ def main() -> None:
 
     require_text("CONTEXT.md", "**Station**")
     require_text("CONTEXT.md", "**Normalizing Merge**")
+    require_text("CONTEXT.md", "**Human Review Notes**")
     require_text("AGENTS.md", "V1 Stations must not overlap")
     require_text("specs/sloprail/specs/core.md", "GIVEN")
     require_text("docs/prds/sloprail-v1-prd.md", "## Problem Statement")

@@ -22,6 +22,7 @@ Sloprail is a lightweight visual canvas for turning short source-video ranges in
 6. Open the Station Folder in an agent workspace.
 7. Agent writes `agent-output/replacement-render.mp4`, `render-notes.md`, and `output.json`.
 8. Merge automation normalizes replacement media if needed, preserves original audio, and writes a Merged Output.
+9. Human review writes `review-notes.json` with station-local time, matching Source Video time, category, and observation. Visible normalization damage is recorded and rerun manually, not auto-fixed.
 
 ## Repository Map
 
