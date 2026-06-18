@@ -45,3 +45,13 @@ On this Windows workstation, if `make` is unavailable:
 ```powershell
 py scripts/validate_project.py
 ```
+
+## Fixture Demo
+
+Run the first fixture-backed end-to-end Station demo:
+
+```powershell
+py scripts/run_e2e_station_demo.py --force
+```
+
+The command writes `demos/issue-10-e2e-station-demo/demo-report.json` plus the generated Station Folder, Replacement Render, Merged Output, merge evidence, and Human Review Notes.

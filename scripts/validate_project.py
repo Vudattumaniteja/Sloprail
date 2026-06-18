@@ -22,6 +22,7 @@ REQUIRED_FILES = [
     "scripts/validate_agent_output.py",
     "scripts/merge_station.py",
     "scripts/review_notes.py",
+    "scripts/run_e2e_station_demo.py",
     ".harness/PROGRESS.md",
     ".harness/DECISIONS.md",
     ".harness/feature_list.json",
@@ -29,6 +30,7 @@ REQUIRED_FILES = [
     ".harness/quality_doc.md",
     "docs/prds/sloprail-v1-prd.md",
     "docs/prds/spec-coordinator-overlap-prd.md",
+    "docs/issue-10-e2e-station-demo.md",
     "specs/sloprail/proposal.md",
     "specs/sloprail/design.md",
     "specs/sloprail/tasks.md",
@@ -53,6 +55,7 @@ REQUIRED_FILES = [
     "tests/test_agent_output_validator.py",
     "tests/test_merge_station.py",
     "tests/test_review_notes.py",
+    "tests/test_e2e_station_demo.py",
     "tests/fixtures/station-folders/canonical-station-001/README.md",
     "tests/fixtures/station-folders/canonical-station-001/station.json",
     "tests/fixtures/station-folders/canonical-station-001/notes.md",
@@ -110,6 +113,8 @@ def main() -> None:
     require_text("proms/README.md", "Test-driven development")
     require_text("proms/issue-03-station-folder-validator.md", "Issue #3")
     require_text("proms/issue-10-e2e-station-demo.md", "HITL")
+    require_text("README.md", "run_e2e_station_demo.py")
+    require_text("docs/issue-10-e2e-station-demo.md", "Rerun Workflow")
 
     canonical_station = ROOT / "tests/fixtures/station-folders/canonical-station-001"
     station_issues = validate_project_or_station(canonical_station)

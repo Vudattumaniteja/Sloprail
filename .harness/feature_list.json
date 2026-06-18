@@ -49,6 +49,14 @@
       "behavior": "Record station-local Human Review Notes with matching Source Video time, issue category, reviewer observation, and optional Normalization Report references.",
       "verification": "py scripts/validate_project.py",
       "issue": "https://github.com/Vudattumaniteja/Sloprail/issues/9"
+    },
+    {
+      "id": "F07",
+      "title": "Fixture-backed end-to-end Station demo",
+      "state": "completed",
+      "behavior": "Run one reproducible Station workflow from fixture Source Video through Station Handoff Validation, simulated completed Agent Action, Agent Output Validation, Normalizing Merge, and Human Review Notes.",
+      "verification": "py scripts/run_e2e_station_demo.py --force; py scripts/validate_project.py",
+      "issue": "https://github.com/Vudattumaniteja/Sloprail/issues/10"
     }
   ]
 }

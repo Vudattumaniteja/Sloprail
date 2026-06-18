@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "station_id": "station-e2e-001",
+  "target_window": {
+    "source_start_seconds": 1.0,
+    "source_end_seconds": 3.0,
+    "duration_seconds": 2.0
+  },
+  "workflow": {
+    "auto_fix": false,
+    "visible_normalization_damage": "record_in_human_review_notes_and_rerun_manually"
+  },
+  "allowed_categories": [
+    "fps",
+    "general",
+    "visual"
+  ],
+  "notes": [
+    {
+      "id": "review-note-001",
+      "review_subject": "replacement_render",
+      "station_local_time_seconds": 0.5,
+      "source_video_time_seconds": 1.5,
+      "category": "visual",
+      "observation": "Fixture Replacement Render is intentionally synthetic and visibly different from the Source Video; acceptable for mechanical demo only."
+    },
+    {
+      "id": "review-note-002",
+      "review_subject": "merged_output",
+      "station_local_time_seconds": 1.0,
+      "source_video_time_seconds": 2.0,
+      "category": "fps",
+      "observation": "Merged Output preserved playback continuity; normalization changed Replacement Render frame rate to match the Source Video.",
+      "normalization_report_reference": {
+        "path": "demos/issue-10-e2e-station-demo/stations/station-e2e-001/merge-output/normalization-report.md",
+        "detail": "Frame rate, resolution, and pixel format normalization were expected in this fixture demo."
+      }
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "status": "completed",
+  "station_id": "station-e2e-001",
+  "source_video": {
+    "id": "fixture-source-video-001",
+    "path": "C:/Users/Manit/Desktop/moodborad/demos/issue-10-e2e-station-demo/source-video.mp4",
+    "media_properties": {
+      "duration_seconds": 5.0,
+      "width": 320,
+      "height": 180,
+      "frame_rate": "30/1",
+      "video_codec": "h264",
+      "pixel_format": "yuv420p",
+      "audio_present": true,
+      "audio_codec": "aac"
+    }
+  },
+  "target_window": {
+    "source_start_seconds": 1.0,
+    "source_end_seconds": 3.0,
+    "duration_seconds": 2.0
+  },
+  "replacement_render": {
+    "path": "C:/Users/Manit/Desktop/moodborad/demos/issue-10-e2e-station-demo/stations/station-e2e-001/agent-output/replacement-render.mp4",
+    "media_properties": {
+      "duration_seconds": 2.0,
+      "width": 160,
+      "height": 90,
+      "frame_rate": "15/1",
+      "video_codec": "h264",
+      "pixel_format": "yuv444p",
+      "audio_present": false
+    },
+    "duration_delta_seconds": 0.0
+  },
+  "normalization": {
+    "changes": [
+      {
+        "field": "resolution",
+        "from": "160x90",
+        "to": "320x180"
+      },
+      {
+        "field": "pixel_format",
+        "from": "yuv444p",
+        "to": "yuv420p"
+      },
+      {
+        "field": "frame_rate",
+        "from": "15/1",
+        "to": "30/1"
+      }
+    ],
+    "normalized_replacement_render_path": "C:/Users/Manit/Desktop/moodborad/demos/issue-10-e2e-station-demo/stations/station-e2e-001/merge-output/normalized-replacement-render.mp4",
+    "normalization_report_path": "C:/Users/Manit/Desktop/moodborad/demos/issue-10-e2e-station-demo/stations/station-e2e-001/merge-output/normalization-report.md"
+  },
+  "merged_output": {
+    "path": "C:/Users/Manit/Desktop/moodborad/demos/issue-10-e2e-station-demo/stations/station-e2e-001/merge-output/merged-output.mp4",
+    "media_properties": {
+      "duration_seconds": 5.015011,
+      "width": 320,
+      "height": 180,
+      "frame_rate": "30/1",
+      "video_codec": "h264",
+      "pixel_format": "yuv420p",
+      "audio_present": true,
+      "audio_codec": "aac"
+    },
+    "original_audio_preserved": true
+  }
+}

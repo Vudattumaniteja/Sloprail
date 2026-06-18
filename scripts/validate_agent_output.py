@@ -96,6 +96,7 @@ def probe_media(path: Path) -> dict[str, Any]:
         "height": video.get("height"),
         "frame_rate": video.get("avg_frame_rate"),
         "video_codec": video.get("codec_name"),
+        "pixel_format": video.get("pix_fmt"),
         "audio_present": audio is not None,
     }
     if audio is not None:
