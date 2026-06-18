@@ -6,6 +6,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from PIL import Image
+
 
 REQUIRED_STATION_FILES = [
     "README.md",
@@ -76,6 +78,18 @@ def as_float(value: Any) -> float | None:
 
 def resolve_relative(folder: Path, relative_path: str) -> Path:
     return (folder / relative_path).resolve()
+
+
+def validate_image_file(path: Path, issues: list[ValidationIssue], expected_format: str | None = None) -> None:
+    try:
+        with Image.open(path) as image:
+            image.verify()
+            if expected_format is not None and image.format != expected_format:
+                issues.append(issue("invalid_image_format", path, f"Image must be {expected_format}, got {image.format}."))
+    except FileNotFoundError:
+        issues.append(issue("unresolved_path_reference", path, "Image path does not resolve."))
+    except Exception as exc:
+        issues.append(issue("invalid_image_file", path, f"Image file is not readable: {exc}"))
 
 
 def validate_required_files(folder: Path, issues: list[ValidationIssue]) -> None:
@@ -294,6 +308,8 @@ def validate_visual_evidence_contract(folder: Path, station: dict[str, Any], iss
     marked_frames = visual_evidence.get("marked_frames")
     if not isinstance(temporal_strip, dict) or temporal_strip.get("path") != "visual-evidence/temporal-strip.png":
         issues.append(issue("missing_temporal_strip", folder / "station.json", "station.json must reference visual-evidence/temporal-strip.png."))
+    else:
+        validate_image_file(resolve_relative(folder, temporal_strip["path"]), issues, expected_format="PNG")
     if not isinstance(representative_frames, list) or not representative_frames:
         issues.append(issue("missing_representative_frames", folder / "station.json", "visual_evidence.representative_frames must be a non-empty list."))
         representative_frames = []
@@ -318,6 +334,8 @@ def validate_visual_evidence_contract(folder: Path, station: dict[str, Any], iss
             issues.append(issue("invalid_representative_frame", folder / "station.json", "Each Representative Frame must declare id."))
         if not isinstance(frame_path, str) or not resolve_relative(folder, frame_path).is_file():
             issues.append(issue("unresolved_path_reference", folder / "station.json", f"Representative Frame path does not resolve: {frame_path}"))
+        else:
+            validate_image_file(resolve_relative(folder, frame_path), issues)
         if not isinstance(coverage_span, dict) or not isinstance(coverage_span.get("id"), str):
             issues.append(issue("invalid_coverage_span", folder / "station.json", "Each Representative Frame must link a Coverage Span with id and timing."))
             continue
@@ -345,6 +363,8 @@ def validate_visual_evidence_contract(folder: Path, station: dict[str, Any], iss
         frame_path = frame.get("path")
         if not isinstance(frame_path, str) or not resolve_relative(folder, frame_path).is_file():
             issues.append(issue("unresolved_path_reference", folder / "station.json", f"Marked Frame path does not resolve: {frame_path}"))
+        else:
+            validate_image_file(resolve_relative(folder, frame_path), issues, expected_format="PNG")
         markup_status = frame.get("markup_status")
         if markup_status not in {"no_visual_markup", "visual_markup_present"}:
             issues.append(issue("invalid_markup_status", folder / "station.json", "Marked Frames must declare markup_status as no_visual_markup or visual_markup_present."))
