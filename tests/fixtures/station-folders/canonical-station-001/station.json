@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "station_id": "station-001",
+  "source_video": {
+    "id": "source-video-001",
+    "path": "visual-evidence/source-window.mp4"
+  },
+  "target_window": {
+    "source_start_seconds": 12.0,
+    "source_end_seconds": 22.0,
+    "duration_seconds": 10.0
+  },
+  "station_context": {
+    "partial": true,
+    "files": [
+      "station-context/full-transcript.md",
+      "station-context/target-window-transcript.md",
+      "station-context/storyline.md"
+    ],
+    "missing": [
+      "design-rules.md"
+    ]
+  },
+  "visual_evidence": {
+    "source_window": {
+      "path": "visual-evidence/source-window.mp4"
+    },
+    "temporal_strip": {
+      "path": "visual-evidence/temporal-strip.png"
+    },
+    "representative_frames": [
+      {
+        "id": "rep-001",
+        "path": "visual-evidence/representative-frames/rep-001.jpg",
+        "coverage_span": {
+          "source_start_seconds": 12.0,
+          "source_end_seconds": 16.0
+        }
+      },
+      {
+        "id": "rep-002",
+        "path": "visual-evidence/representative-frames/rep-002.jpg",
+        "coverage_span": {
+          "source_start_seconds": 16.0,
+          "source_end_seconds": 22.0
+        }
+      }
+    ],
+    "marked_frames": [
+      {
+        "id": "rep-001-marked",
+        "path": "visual-evidence/marked-frames/rep-001-marked.png",
+        "markup_status": "visual-markup-present"
+      },
+      {
+        "id": "rep-002-marked",
+        "path": "visual-evidence/marked-frames/rep-002-marked.png",
+        "markup_status": "no-visual-markup"
+      }
+    ]
+  },
+  "agent_output": {
+    "directory": "agent-output",
+    "replacement_render_path": "agent-output/replacement-render.mp4",
+    "render_notes_path": "agent-output/render-notes.md",
+    "output_json_path": "agent-output/output.json"
+  }
+}

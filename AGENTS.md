@@ -11,9 +11,10 @@ Sloprail is a lightweight browser-oriented visual canvas that prepares Station F
 
 ## Quick Start
 - Install: `make setup`
-- Run tests: `make test`
+- Run tests: `make test` or `py -m unittest discover -s tests`
 - Full verification: `make check`
 - Windows fallback verification: `py scripts/validate_project.py`
+- Station Handoff Validation: `py scripts/validate_station_folder.py tests/fixtures/station-folders/canonical-station-001`
 - Clean generated temporary files: `make clean`
 
 ## Hard Constraints

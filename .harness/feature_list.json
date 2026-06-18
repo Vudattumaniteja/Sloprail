@@ -5,7 +5,7 @@
     {
       "id": "F01",
       "title": "Station Folder generator",
-      "state": "not_started",
+      "state": "completed",
       "behavior": "Create a validated Station Folder from one Source Video Target Window using the v1 folder contract.",
       "verification": "py scripts/validate_project.py",
       "issue": "https://github.com/Vudattumaniteja/Sloprail/issues/3"
