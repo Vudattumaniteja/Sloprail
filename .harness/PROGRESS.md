@@ -40,6 +40,7 @@
 - [#8 Merge one completed Station with ffmpeg Normalizing Merge](https://github.com/Vudattumaniteja/Sloprail/issues/8)
 - [#9 Add Human Review Notes for merged playback](https://github.com/Vudattumaniteja/Sloprail/issues/9)
 - [#10 Run first fixture-backed end-to-end Station demo](https://github.com/Vudattumaniteja/Sloprail/issues/10)
+- [#20 Build Visual Canvas markup interaction for Representative Frames](https://github.com/Vudattumaniteja/Sloprail/issues/20)
 
 ## Next Steps
 1. Start browser Visual Canvas implementation work when ready.

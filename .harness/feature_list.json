@@ -57,6 +57,14 @@
       "behavior": "Run one reproducible Station workflow from fixture Source Video through Station Handoff Validation, simulated completed Agent Action, Agent Output Validation, Normalizing Merge, and Human Review Notes.",
       "verification": "py scripts/run_e2e_station_demo.py --force; py scripts/validate_project.py",
       "issue": "https://github.com/Vudattumaniteja/Sloprail/issues/10"
+    },
+    {
+      "id": "F08",
+      "title": "Visual Canvas markup interaction",
+      "state": "not_started",
+      "behavior": "Let a human draw Visual Markup on a Representative Frame and save the result as a Marked Frame without mutating the clean Representative Frame.",
+      "verification": "py scripts/validate_project.py",
+      "issue": "https://github.com/Vudattumaniteja/Sloprail/issues/20"
     }
   ]
 }

@@ -48,6 +48,7 @@ REQUIRED_FILES = [
     "proms/issue-08-normalizing-merge.md",
     "proms/issue-09-human-review-notes.md",
     "proms/issue-10-e2e-station-demo.md",
+    "proms/issue-20-visual-canvas-markup.md",
     "tests/test_station_folder_validator.py",
     "tests/test_generate_station_folder.py",
     "tests/test_frame_collapse.py",
@@ -113,6 +114,7 @@ def main() -> None:
     require_text("proms/README.md", "Test-driven development")
     require_text("proms/issue-03-station-folder-validator.md", "Issue #3")
     require_text("proms/issue-10-e2e-station-demo.md", "HITL")
+    require_text("proms/issue-20-visual-canvas-markup.md", "Visual Canvas")
     require_text("README.md", "run_e2e_station_demo.py")
     require_text("docs/issue-10-e2e-station-demo.md", "Rerun Workflow")
 

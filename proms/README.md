@@ -22,6 +22,7 @@
 - [issue-08-normalizing-merge.md](issue-08-normalizing-merge.md) - ffmpeg Normalizing Merge.
 - [issue-09-human-review-notes.md](issue-09-human-review-notes.md) - Human Review Notes.
 - [issue-10-e2e-station-demo.md](issue-10-e2e-station-demo.md) - first fixture-backed HITL demo.
+- [issue-20-visual-canvas-markup.md](issue-20-visual-canvas-markup.md) - human Visual Canvas annotation and Marked Frame saving.
 
 ## Engineering Approaches To Apply
 
@@ -34,6 +35,7 @@
 - **Outside-in testing:** validate user-visible folder and media outcomes before internals.
 - **Risk-based testing:** put stronger tests around duration tolerance, path validation, non-overlap, and merge reports.
 - **HITL review:** use human-in-the-loop only where visual quality judgment is genuinely required.
+- **Interaction-first slicing:** when a human action creates core evidence, give that interaction its own vertical slice rather than hiding it inside downstream generation.
 
 ## Default Agent Rules
 

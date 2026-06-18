@@ -22,6 +22,9 @@
 
 ## Phase 3: Agent Handoff
 
+- [ ] Build Visual Canvas interaction for selecting a Representative Frame.
+- [ ] Let the human draw Visual Markup on the selected Representative Frame.
+- [ ] Save the resulting Marked Frame without mutating the clean Representative Frame.
 - [x] Generate Station `README.md` using the locked first-read brief.
 - [x] Generate `station.json` with source time, station-local time, Coverage Spans, Media Properties, and Read Boundary.
 - [x] Snapshot Station Context into the Station Folder.
