@@ -36,35 +36,43 @@
         "id": "rep-001",
         "path": "visual-evidence/representative-frames/rep-001.jpg",
         "coverage_span": {
+          "id": "span-001",
           "station_local_start_seconds": 0.0,
           "station_local_end_seconds": 4.0,
           "source_start_seconds": 12.0,
           "source_end_seconds": 16.0
         },
+        "marked_frame_id": "rep-001-marked",
         "selection_source": "automatic-frame-collapse"
       },
       {
         "id": "rep-002",
         "path": "visual-evidence/representative-frames/rep-002.jpg",
         "coverage_span": {
+          "id": "span-002",
           "station_local_start_seconds": 4.0,
           "station_local_end_seconds": 10.0,
           "source_start_seconds": 16.0,
           "source_end_seconds": 22.0
         },
+        "marked_frame_id": "rep-002-marked",
         "selection_source": "automatic-frame-collapse"
       }
     ],
     "marked_frames": [
       {
         "id": "rep-001-marked",
+        "representative_frame_id": "rep-001",
+        "coverage_span_id": "span-001",
         "path": "visual-evidence/marked-frames/rep-001-marked.png",
-        "markup_status": "visual-markup-present"
+        "markup_status": "visual_markup_present"
       },
       {
         "id": "rep-002-marked",
+        "representative_frame_id": "rep-002",
+        "coverage_span_id": "span-002",
         "path": "visual-evidence/marked-frames/rep-002-marked.png",
-        "markup_status": "no-visual-markup"
+        "markup_status": "no_visual_markup"
       }
     ]
   },
