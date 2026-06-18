@@ -81,9 +81,20 @@ class GenerateStationFolderTests(unittest.TestCase):
             self.assertEqual(station_json["target_window"]["station_local_start_seconds"], 0.0)
             self.assertEqual(station_json["target_window"]["station_local_end_seconds"], 2.0)
             self.assertEqual(station_json["read_boundary"]["scope"], "station-folder-only")
+            self.assertEqual(station_json["visual_evidence"]["frame_collapse_report"]["path"], "visual-evidence/frame-collapse-report.json")
+            self.assertTrue(station_json["visual_evidence"]["representative_frames"])
             self.assertTrue(station_json["station_context"]["partial"])
             self.assertEqual(station_json["station_context"]["missing"], ["design-rules.md"])
             self.assertIn("Partial Station Context", (output_folder / "README.md").read_text(encoding="utf-8"))
+
+            report = json.loads((output_folder / "visual-evidence" / "frame-collapse-report.json").read_text(encoding="utf-8"))
+            self.assertEqual(report["sampling"]["frame_sampling_rate_fps"], 2.0)
+            self.assertEqual(report["perceptual_hash"]["distance_metric"], "hamming")
+            self.assertEqual(report["representative_candidate_selection"]["manual_representative_frames"], [])
+            self.assertEqual(report["representative_candidate_selection"]["kept_count"], len(report["kept_frames"]))
+            self.assertGreater(report["sampling"]["candidate_count"], 0)
+            for kept_frame in report["kept_frames"]:
+                self.assertTrue((output_folder / kept_frame["path"]).is_file())
 
 
 if __name__ == "__main__":

@@ -2,14 +2,25 @@
   "session_id": "",
   "started_at": "",
   "project_path": "C:\\Users\\Manit\\Desktop\\moodborad",
-  "active_feature": "",
+  "active_feature": "F02",
   "context_usage": 0,
   "handoff_ready": true,
-  "last_verification": "",
+  "last_verification": "py -m unittest discover -s tests; py scripts/validate_project.py",
   "decisions_made": [
     "V1 is a visual canvas that creates Station Folders, not an agent harness.",
     "V1 is non-HTML and uses image, Markdown, JSON, and video files.",
     "ffmpeg automation performs visual replacement and preserves original audio."
   ],
-  "files_modified": []
+  "files_modified": [
+    "scripts/frame_collapse.py",
+    "scripts/generate_station_folder.py",
+    "scripts/validate_station_folder.py",
+    "scripts/validate_project.py",
+    "tests/test_frame_collapse.py",
+    "tests/test_generate_station_folder.py",
+    "tests/fixtures/station-folders/canonical-station-001/station.json",
+    "tests/fixtures/station-folders/canonical-station-001/visual-evidence/frame-collapse-report.json",
+    ".harness/feature_list.json",
+    ".harness/PROGRESS.md"
+  ]
 }
