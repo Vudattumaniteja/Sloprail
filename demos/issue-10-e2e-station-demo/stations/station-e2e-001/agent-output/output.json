@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "station_id": "station-e2e-001",
+  "source_video_id": "fixture-source-video-001",
+  "status": "completed",
+  "replacement_render_path": "agent-output/replacement-render.mp4",
+  "render_notes_path": "agent-output/render-notes.md"
+}

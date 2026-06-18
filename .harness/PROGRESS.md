@@ -19,6 +19,7 @@
 - [x] Issue #7 Agent Output Validation implemented
 - [x] Issue #8 ffmpeg Normalizing Merge implemented
 - [x] Issue #9 Human Review Notes implemented
+- [x] Issue #10 first fixture-backed end-to-end Station demo implemented
 
 ## In Progress
 - [x] Push private GitHub repository
@@ -41,10 +42,11 @@
 - [#10 Run first fixture-backed end-to-end Station demo](https://github.com/Vudattumaniteja/Sloprail/issues/10)
 
 ## Next Steps
-1. Run first fixture-backed end-to-end Station demo.
+1. Start browser Visual Canvas implementation work when ready.
 
 ## Latest Verification
 - `py -m unittest discover -s tests -v` - passed, 39 tests
 - `py scripts\validate_project.py` - passed
 - `powershell -ExecutionPolicy Bypass -File scripts\check.ps1` - passed
+- `py scripts\run_e2e_station_demo.py --force` - passed; wrote `demos/issue-10-e2e-station-demo/demo-report.json`
 - `make check` - not run; `make` is not installed in this Windows shell
