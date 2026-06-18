@@ -20,6 +20,7 @@
 - [x] Issue #8 ffmpeg Normalizing Merge implemented
 - [x] Issue #9 Human Review Notes implemented
 - [x] Issue #10 first fixture-backed end-to-end Station demo implemented
+- [x] Issue #20 Visual Canvas markup interaction implemented
 
 ## In Progress
 - [x] Push private GitHub repository
@@ -43,10 +44,10 @@
 - [#20 Build Visual Canvas markup interaction for Representative Frames](https://github.com/Vudattumaniteja/Sloprail/issues/20)
 
 ## Next Steps
-1. Start browser Visual Canvas implementation work when ready.
+1. Continue browser Visual Canvas implementation beyond the markup slice when ready.
 
 ## Latest Verification
-- `py -m unittest discover -s tests -v` - passed, 39 tests
+- `py -m unittest discover -s tests -v` - passed, 43 tests
 - `py scripts\validate_project.py` - passed
 - `powershell -ExecutionPolicy Bypass -File scripts\check.ps1` - passed
 - `py scripts\run_e2e_station_demo.py --force` - passed; wrote `demos/issue-10-e2e-station-demo/demo-report.json`

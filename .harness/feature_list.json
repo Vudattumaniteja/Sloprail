@@ -61,9 +61,9 @@
     {
       "id": "F08",
       "title": "Visual Canvas markup interaction",
-      "state": "not_started",
+      "state": "completed",
       "behavior": "Let a human draw Visual Markup on a Representative Frame and save the result as a Marked Frame without mutating the clean Representative Frame.",
-      "verification": "py scripts/validate_project.py",
+      "verification": "py -m unittest discover -s tests -v; py scripts/validate_project.py",
       "issue": "https://github.com/Vudattumaniteja/Sloprail/issues/20"
     }
   ]
