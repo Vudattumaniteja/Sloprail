@@ -37,7 +37,7 @@
     {
       "id": "F05",
       "title": "ffmpeg Normalizing Merge",
-      "state": "not_started",
+      "state": "completed",
       "behavior": "Merge one completed Station into the Source Video while preserving original audio and writing merge evidence.",
       "verification": "py scripts/validate_project.py",
       "issue": "https://github.com/Vudattumaniteja/Sloprail/issues/8"

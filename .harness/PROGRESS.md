@@ -17,6 +17,7 @@
 - [x] Issue #5 perceptual-hash Frame Collapse report implemented
 - [x] Issue #6 Representative Frames, Marked Frames, and Temporal Strip implemented
 - [x] Issue #7 Agent Output Validation implemented
+- [x] Issue #8 ffmpeg Normalizing Merge implemented
 
 ## In Progress
 - [x] Push private GitHub repository
@@ -39,6 +40,11 @@
 - [#10 Run first fixture-backed end-to-end Station demo](https://github.com/Vudattumaniteja/Sloprail/issues/10)
 
 ## Next Steps
-1. Build ffmpeg merge automation with Normalization Report.
-2. Add Human Review Notes for merged playback.
-3. Run first fixture-backed end-to-end Station demo.
+1. Add Human Review Notes for merged playback.
+2. Run first fixture-backed end-to-end Station demo.
+
+## Latest Verification
+- `py -m unittest discover -s tests -v` - passed, 34 tests
+- `py scripts\validate_project.py` - passed
+- `powershell -ExecutionPolicy Bypass -File scripts\check.ps1` - passed
+- `make check` - not run; `make` is not installed in this Windows shell
