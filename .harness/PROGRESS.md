@@ -13,6 +13,7 @@
 - [x] OpenSpec-compatible bundle created
 - [x] Harness initialized
 - [x] Issue #3 canonical non-HTML Station Folder fixture and Station Handoff Validation implemented
+- [x] Issue #4 Source Video Target Window to Station Folder shell generator implemented
 
 ## In Progress
 - [x] Push private GitHub repository
@@ -35,6 +36,6 @@
 - [#10 Run first fixture-backed end-to-end Station demo](https://github.com/Vudattumaniteja/Sloprail/issues/10)
 
 ## Next Steps
-1. Generate source-window media and Station README manifest.
-2. Build frame sampling and perceptual-hash reduction.
+1. Build frame sampling and perceptual-hash reduction.
+2. Render Representative Frames, Marked Frames, and Temporal Strip.
 3. Build ffmpeg merge automation with Normalization Report.
