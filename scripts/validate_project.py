@@ -25,6 +25,17 @@ REQUIRED_FILES = [
     "specs/sloprail/specs/core.md",
     "specs/sloprail/out-of-scope.md",
     "specs/sloprail/open-questions.md",
+    "proms/README.md",
+    "proms/issue-01-product-prd.md",
+    "proms/issue-02-spec-coordinator-overlap.md",
+    "proms/issue-03-station-folder-validator.md",
+    "proms/issue-04-source-window-manifest.md",
+    "proms/issue-05-frame-collapse-report.md",
+    "proms/issue-06-temporal-strip.md",
+    "proms/issue-07-agent-output-validator.md",
+    "proms/issue-08-normalizing-merge.md",
+    "proms/issue-09-human-review-notes.md",
+    "proms/issue-10-e2e-station-demo.md",
 ]
 
 
@@ -64,6 +75,9 @@ def main() -> None:
     require_text("specs/sloprail/specs/core.md", "GIVEN")
     require_text("docs/prds/sloprail-v1-prd.md", "## Problem Statement")
     require_text("docs/prds/spec-coordinator-overlap-prd.md", "## Problem Statement")
+    require_text("proms/README.md", "Test-driven development")
+    require_text("proms/issue-03-station-folder-validator.md", "Issue #3")
+    require_text("proms/issue-10-e2e-station-demo.md", "HITL")
 
     print("Sloprail project validation passed.")
 

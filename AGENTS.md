@@ -38,9 +38,11 @@ Sloprail is a lightweight browser-oriented visual canvas that prepares Station F
 - [Sloprail V1 PRD](docs/prds/sloprail-v1-prd.md) - Read before changing product scope.
 - [Spec Coordinator Overlap PRD](docs/prds/spec-coordinator-overlap-prd.md) - Read before changing spec-generation or handoff behavior.
 - [OpenSpec Bundle](specs/sloprail/) - Read when planning implementation tasks.
+- [Proms](proms/) - Read when launching a fresh Codex/agent session for a specific GitHub issue.
 
 ## Session Workflow
 - Clock in: read `.harness/PROGRESS.md`, `.harness/DECISIONS.md`, and `CONTEXT.md`.
 - Pick one feature from `.harness/feature_list.json`; keep WIP at one feature per agent.
+- If the task maps to an issue, start from the matching file in `proms/`.
 - Before editing contracts, update the glossary or PRD first.
 - Clock out: run `make check`, update `.harness/PROGRESS.md`, and commit completed work.

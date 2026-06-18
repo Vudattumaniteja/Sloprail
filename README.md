@@ -29,6 +29,7 @@ Sloprail is a lightweight visual canvas for turning short source-video ranges in
 - [docs/prds/sloprail-v1-prd.md](docs/prds/sloprail-v1-prd.md) - product PRD synthesized from the planning session.
 - [docs/prds/spec-coordinator-overlap-prd.md](docs/prds/spec-coordinator-overlap-prd.md) - PRD for how Sloprail specs overlap with spec-coordinator.
 - [specs/sloprail/](specs/sloprail/) - OpenSpec-compatible bundle.
+- [proms/](proms/) - prompt files for launching issue-specific agent sessions.
 - [AGENTS.md](AGENTS.md) - agent entrypoint and hard constraints.
 - [.harness/](.harness/) - harness state and feature tracking.
 
