@@ -18,11 +18,12 @@ Sloprail is a lightweight visual canvas for turning short source-video ranges in
 2. Select a Target Window.
 3. Sample at 2 fps and perform perceptual-hash frame reduction.
 4. Create Representative Frames, Marked Frames, and a Temporal Strip with embedded timing labels.
-5. Save a validated Station Folder with Station Context and a Station-Level Note.
-6. Open the Station Folder in an agent workspace.
-7. Agent writes `agent-output/replacement-render.mp4`, `render-notes.md`, and `output.json`.
-8. Merge automation normalizes replacement media if needed, preserves original audio, and writes a Merged Output.
-9. Human review writes `review-notes.json` with station-local time, matching Source Video time, category, and observation. Visible normalization damage is recorded and rerun manually, not auto-fixed.
+5. Open the Visual Canvas markup interaction, draw Visual Markup on Representative Frames, and save Marked Frames.
+6. Save a validated Station Folder with Station Context and a Station-Level Note.
+7. Open the Station Folder in an agent workspace.
+8. Agent writes `agent-output/replacement-render.mp4`, `render-notes.md`, and `output.json`.
+9. Merge automation normalizes replacement media if needed, preserves original audio, and writes a Merged Output.
+10. Human review writes `review-notes.json` with station-local time, matching Source Video time, category, and observation. Visible normalization damage is recorded and rerun manually, not auto-fixed.
 
 ## Repository Map
 
@@ -55,3 +56,13 @@ py scripts/run_e2e_station_demo.py --force
 ```
 
 The command writes `demos/issue-10-e2e-station-demo/demo-report.json` plus the generated Station Folder, Replacement Render, Merged Output, merge evidence, and Human Review Notes.
+
+## Visual Canvas Markup
+
+Open the local browser interaction for a Station Folder:
+
+```powershell
+py scripts/visual_canvas_markup.py --station-folder tests/fixtures/station-folders/canonical-station-001 --serve
+```
+
+The browser surface lets a human select a Representative Frame, draw Visual Markup, and save the result under `visual-evidence/marked-frames/`. It updates `station.json` links and keeps clean Representative Frames unchanged.
