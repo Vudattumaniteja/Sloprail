@@ -12,6 +12,7 @@
 - [x] Two PRD tracks created
 - [x] OpenSpec-compatible bundle created
 - [x] Harness initialized
+- [x] Issue #3 canonical non-HTML Station Folder fixture and Station Handoff Validation implemented
 
 ## In Progress
 - [x] Push private GitHub repository
@@ -34,6 +35,6 @@
 - [#10 Run first fixture-backed end-to-end Station demo](https://github.com/Vudattumaniteja/Sloprail/issues/10)
 
 ## Next Steps
-1. Build a minimal Station Folder generator.
+1. Generate source-window media and Station README manifest.
 2. Build frame sampling and perceptual-hash reduction.
 3. Build ffmpeg merge automation with Normalization Report.

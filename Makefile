@@ -4,7 +4,7 @@ setup:
 	python -m pip --version
 
 test:
-	python scripts/validate_project.py
+	python -m unittest discover -s tests
 
 lint:
 	python scripts/validate_project.py
